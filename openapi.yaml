@@ -40,7 +40,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.MultipleArticlesReply'
+                                $ref: '#/components/schemas/MultipleArticlesReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
         post:
             tags:
                 - Realworld
@@ -49,7 +55,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/realworld.v1.CreateArticleRequest'
+                            $ref: '#/components/schemas/CreateArticleRequest'
                 required: true
             responses:
                 "200":
@@ -57,7 +63,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.SingleArticleReply'
+                                $ref: '#/components/schemas/SingleArticleReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/articles/feed:
         get:
             tags:
@@ -80,7 +92,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.MultipleArticlesReply'
+                                $ref: '#/components/schemas/MultipleArticlesReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/articles/{slug}:
         get:
             tags:
@@ -98,7 +116,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.SingleArticleReply'
+                                $ref: '#/components/schemas/SingleArticleReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
         put:
             tags:
                 - Realworld
@@ -113,7 +137,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/realworld.v1.UpdateArticleRequest'
+                            $ref: '#/components/schemas/UpdateArticleRequest'
                 required: true
             responses:
                 "200":
@@ -121,7 +145,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.SingleArticleReply'
+                                $ref: '#/components/schemas/SingleArticleReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
         delete:
             tags:
                 - Realworld
@@ -138,7 +168,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.SingleArticleReply'
+                                $ref: '#/components/schemas/SingleArticleReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/articles/{slug}/comments:
         get:
             tags:
@@ -160,7 +196,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.MultipleCommentsReply'
+                                $ref: '#/components/schemas/MultipleCommentsReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
         post:
             tags:
                 - Realworld
@@ -175,7 +217,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/realworld.v1.AddCommentRequest'
+                            $ref: '#/components/schemas/AddCommentRequest'
                 required: true
             responses:
                 "200":
@@ -183,7 +225,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.SingleCommentReply'
+                                $ref: '#/components/schemas/SingleCommentReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/articles/{slug}/comments/{id}:
         delete:
             tags:
@@ -207,7 +255,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.SingleCommentReply'
+                                $ref: '#/components/schemas/SingleCommentReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/articles/{slug}/favorite:
         post:
             tags:
@@ -225,7 +279,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.SingleArticleReply'
+                                $ref: '#/components/schemas/SingleArticleReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
         delete:
             tags:
                 - Realworld
@@ -242,7 +302,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.SingleArticleReply'
+                                $ref: '#/components/schemas/SingleArticleReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/profiles/{username}:
         get:
             tags:
@@ -260,7 +326,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.ProfileReply'
+                                $ref: '#/components/schemas/ProfileReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/profiles/{username}/follow:
         post:
             tags:
@@ -276,7 +348,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/realworld.v1.FollowUserRequest'
+                            $ref: '#/components/schemas/FollowUserRequest'
                 required: true
             responses:
                 "200":
@@ -284,7 +356,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.ProfileReply'
+                                $ref: '#/components/schemas/ProfileReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
         delete:
             tags:
                 - Realworld
@@ -301,7 +379,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.ProfileReply'
+                                $ref: '#/components/schemas/ProfileReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/tags:
         get:
             tags:
@@ -313,7 +397,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.TagListReply'
+                                $ref: '#/components/schemas/TagListReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/user:
         get:
             tags:
@@ -325,7 +415,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.UserReply'
+                                $ref: '#/components/schemas/UserReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
         put:
             tags:
                 - Realworld
@@ -334,7 +430,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/realworld.v1.UpdateUserRequest'
+                            $ref: '#/components/schemas/UpdateUserRequest'
                 required: true
             responses:
                 "200":
@@ -342,7 +438,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.UserReply'
+                                $ref: '#/components/schemas/UserReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/users:
         post:
             tags:
@@ -352,7 +454,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/realworld.v1.RegisterRequest'
+                            $ref: '#/components/schemas/RegisterRequest'
                 required: true
             responses:
                 "200":
@@ -360,7 +462,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.UserReply'
+                                $ref: '#/components/schemas/UserReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/users/login:
         post:
             tags:
@@ -370,7 +478,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/realworld.v1.LoginRequest'
+                            $ref: '#/components/schemas/LoginRequest'
                 required: true
             responses:
                 "200":
@@ -378,22 +486,28 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/realworld.v1.UserReply'
+                                $ref: '#/components/schemas/UserReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
 components:
     schemas:
-        realworld.v1.AddCommentRequest:
+        AddCommentRequest:
             type: object
             properties:
                 comment:
-                    $ref: '#/components/schemas/realworld.v1.AddCommentRequest_Comment'
+                    $ref: '#/components/schemas/AddCommentRequest_Comment'
                 slug:
                     type: string
-        realworld.v1.AddCommentRequest_Comment:
+        AddCommentRequest_Comment:
             type: object
             properties:
                 body:
                     type: string
-        realworld.v1.Article:
+        Article:
             type: object
             properties:
                 slug:
@@ -420,8 +534,8 @@ components:
                     type: integer
                     format: uint32
                 author:
-                    $ref: '#/components/schemas/realworld.v1.Profile'
-        realworld.v1.Comment:
+                    $ref: '#/components/schemas/Profile'
+        Comment:
             type: object
             properties:
                 id:
@@ -436,13 +550,13 @@ components:
                 body:
                     type: string
                 author:
-                    $ref: '#/components/schemas/realworld.v1.Profile'
-        realworld.v1.CreateArticleRequest:
+                    $ref: '#/components/schemas/Profile'
+        CreateArticleRequest:
             type: object
             properties:
                 article:
-                    $ref: '#/components/schemas/realworld.v1.CreateArticleRequest_Article'
-        realworld.v1.CreateArticleRequest_Article:
+                    $ref: '#/components/schemas/CreateArticleRequest_Article'
+        CreateArticleRequest_Article:
             type: object
             properties:
                 title:
@@ -455,41 +569,49 @@ components:
                     type: array
                     items:
                         type: string
-        realworld.v1.FollowUserRequest:
+        FollowUserRequest:
             type: object
             properties:
                 username:
                     type: string
-        realworld.v1.LoginRequest:
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        LoginRequest:
             type: object
             properties:
                 user:
-                    $ref: '#/components/schemas/realworld.v1.LoginRequest_User'
-        realworld.v1.LoginRequest_User:
+                    $ref: '#/components/schemas/LoginRequest_User'
+        LoginRequest_User:
             type: object
             properties:
                 email:
                     type: string
                 password:
                     type: string
-        realworld.v1.MultipleArticlesReply:
+        MultipleArticlesReply:
             type: object
             properties:
                 articles:
                     type: array
                     items:
-                        $ref: '#/components/schemas/realworld.v1.Article'
+                        $ref: '#/components/schemas/Article'
                 articlesCount:
                     type: integer
                     format: uint32
-        realworld.v1.MultipleCommentsReply:
+        MultipleCommentsReply:
             type: object
             properties:
                 comments:
                     type: array
                     items:
-                        $ref: '#/components/schemas/realworld.v1.Comment'
-        realworld.v1.Profile:
+                        $ref: '#/components/schemas/Comment'
+        Profile:
             type: object
             properties:
                 username:
@@ -500,17 +622,17 @@ components:
                     type: string
                 following:
                     type: boolean
-        realworld.v1.ProfileReply:
+        ProfileReply:
             type: object
             properties:
                 profile:
-                    $ref: '#/components/schemas/realworld.v1.Profile'
-        realworld.v1.RegisterRequest:
+                    $ref: '#/components/schemas/Profile'
+        RegisterRequest:
             type: object
             properties:
                 user:
-                    $ref: '#/components/schemas/realworld.v1.RegisterRequest_User'
-        realworld.v1.RegisterRequest_User:
+                    $ref: '#/components/schemas/RegisterRequest_User'
+        RegisterRequest_User:
             type: object
             properties:
                 username:
@@ -519,31 +641,47 @@ components:
                     type: string
                 password:
                     type: string
-        realworld.v1.SingleArticleReply:
+        SingleArticleReply:
             type: object
             properties:
                 article:
-                    $ref: '#/components/schemas/realworld.v1.Article'
-        realworld.v1.SingleCommentReply:
+                    $ref: '#/components/schemas/Article'
+        SingleCommentReply:
             type: object
             properties:
                 comment:
-                    $ref: '#/components/schemas/realworld.v1.Comment'
-        realworld.v1.TagListReply:
+                    $ref: '#/components/schemas/Comment'
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        TagListReply:
             type: object
             properties:
                 tags:
                     type: array
                     items:
                         type: string
-        realworld.v1.UpdateArticleRequest:
+        UpdateArticleRequest:
             type: object
             properties:
                 article:
-                    $ref: '#/components/schemas/realworld.v1.UpdateArticleRequest_Article'
+                    $ref: '#/components/schemas/UpdateArticleRequest_Article'
                 slug:
                     type: string
-        realworld.v1.UpdateArticleRequest_Article:
+        UpdateArticleRequest_Article:
             type: object
             properties:
                 title:
@@ -556,12 +694,12 @@ components:
                     type: array
                     items:
                         type: string
-        realworld.v1.UpdateUserRequest:
+        UpdateUserRequest:
             type: object
             properties:
                 user:
-                    $ref: '#/components/schemas/realworld.v1.UpdateUserRequest_User'
-        realworld.v1.UpdateUserRequest_User:
+                    $ref: '#/components/schemas/UpdateUserRequest_User'
+        UpdateUserRequest_User:
             type: object
             properties:
                 email:
@@ -574,12 +712,12 @@ components:
                     type: string
                 image:
                     type: string
-        realworld.v1.UserReply:
+        UserReply:
             type: object
             properties:
                 user:
-                    $ref: '#/components/schemas/realworld.v1.UserReply_User'
-        realworld.v1.UserReply_User:
+                    $ref: '#/components/schemas/UserReply_User'
+        UserReply_User:
             type: object
             properties:
                 email:
