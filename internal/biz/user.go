@@ -153,7 +153,7 @@ func (uc *UserUsecase) UpdateUser(ctx context.Context, uu *UserUpdate) (*UserLog
 func hashPassword(pwd string) string {
 	b, err := bcrypt.GenerateFromPassword([]byte(pwd), bcrypt.DefaultCost)
 	if err != nil {
-		panic(err)
+		panic(err) // 简化处理，一般不要这么干
 	}
 	return string(b)
 }

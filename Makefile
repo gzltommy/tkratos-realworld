@@ -1,6 +1,8 @@
 GOHOSTOS:=$(shell go env GOHOSTOS)
 GOPATH:=$(shell go env GOPATH)
 VERSION=$(shell git describe --tags --always)
+#INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
+#API_PROTO_FILES=$(shell find api -name *.proto)
 
 ifeq ($(GOHOSTOS), windows)
 	#the `find.exe` is different from `find` in bash/shell.
@@ -22,6 +24,15 @@ init:
 	go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
 	go install github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@latest
 	go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest
+
+.PHONY: errors
+# generate errors code
+errors:
+	protoc --proto_path=. \
+               --proto_path=./third_party \
+               --go_out=paths=source_relative:. \
+               --go-errors_out=paths=source_relative:. \
+               $(API_PROTO_FILES)
 
 .PHONY: config
 # generate internal proto
@@ -53,6 +64,26 @@ generate:
 	go mod tidy
 	go get github.com/google/wire/cmd/wire@latest
 	go generate ./...
+
+.PHONY:wire
+# wire
+wire:
+	cd cmd/tkratos-realworld && wire
+
+.PHONY: startdb
+# start db
+startdb:
+	cd deploy/mysql && docker-compose up -d
+
+.PHONY: stopdb
+# stop db
+stopdb:
+	cd deploy/mysql && docker-compose down
+
+.PHONY: run
+# run
+run:
+	kratos run
 
 .PHONY: all
 # generate all

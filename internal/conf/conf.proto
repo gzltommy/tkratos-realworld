@@ -22,6 +22,7 @@ message Server {
     string addr = 2;
     google.protobuf.Duration timeout = 3;
   }
+
   HTTP http = 1;
   GRPC grpc = 2;
 }

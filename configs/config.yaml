@@ -7,5 +7,6 @@ server:
     timeout: 1s
 data:
   database:
-    driver: mysql
-    source: root:123456@tcp(127.0.0.1:3306)/realworld
+    dsn: root:123456@tcp(127.0.0.1:3306)/realworld?charset=utf8mb4&parseTime=True&loc=Local
+jwt:
+  secret: "123456"

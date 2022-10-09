@@ -2,7 +2,12 @@ package auth
 
 import (
 	"context"
+	"errors"
+	"fmt"
+	"github.com/go-kratos/kratos/v2/middleware"
+	"github.com/go-kratos/kratos/v2/transport"
 	"github.com/golang-jwt/jwt/v4"
+	"strings"
 	"time"
 )
 
@@ -28,4 +33,39 @@ func GenerateToken(secret string, userid uint) string {
 
 func FromContext(ctx context.Context) *CurrentUser {
 	return ctx.Value(currentUserKey).(*CurrentUser)
+}
+func WithContext(ctx context.Context, user *CurrentUser) context.Context {
+	return context.WithValue(ctx, currentUserKey, user)
+}
+
+func JWTAuth(secret string) middleware.Middleware {
+	return func(handler middleware.Handler) middleware.Handler {
+		return func(ctx context.Context, req interface{}) (interface{}, error) {
+			if tr, ok := transport.FromClientContext(ctx); ok {
+				tokenString := tr.RequestHeader().Get("Authorization")
+				auths := strings.SplitN(tokenString, " ", 2)
+				if len(auths) != 2 || !strings.EqualFold(auths[0], "Token") {
+					return nil, errors.New("jwt token missing")
+				}
+				token, err := jwt.Parse(auths[1], func(token *jwt.Token) (interface{}, error) {
+					if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+						return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+					}
+					return []byte(secret), nil
+				})
+
+				if err != nil {
+					return nil, err
+				}
+				if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+					if u, ok := claims["userid"]; ok {
+						ctx = WithContext(ctx, &CurrentUser{UserID: uint(u.(float64))})
+					}
+				} else {
+					return nil, errors.New("token Invalid")
+				}
+			}
+			return nil, errors.New("token invalid")
+		}
+	}
 }

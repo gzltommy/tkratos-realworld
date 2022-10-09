@@ -5,6 +5,7 @@ import (
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 	"tkratos-realworld/internal/biz"
 )
 
@@ -113,4 +114,61 @@ func (r *userRepo) GetUserByUsername(ctx context.Context, username string) (rv *
 		Image:        u.Image,
 		PasswordHash: u.PasswordHash,
 	}, nil
+}
+
+type profileRepo struct {
+	data *Data
+	log  *log.Helper
+}
+
+func NewProfileRepo(data *Data, logger log.Logger) biz.ProfileRepo {
+	return &profileRepo{
+		data: data,
+		log:  log.NewHelper(logger),
+	}
+}
+
+func (r *profileRepo) GetProfile(ctx context.Context, username string) (rv *biz.Profile, err error) {
+	u := new(User)
+	err = r.data.db.Where("username = ?", username).First(u).Error
+	if err != nil {
+		return nil, err
+	}
+	return &biz.Profile{
+		ID:        u.ID,
+		Username:  u.Username,
+		Bio:       u.Bio,
+		Image:     u.Image,
+		Following: false, // fixme
+	}, nil
+}
+
+type FollowUser struct {
+	gorm.Model
+	UserID      uint
+	FollowingID uint
+}
+
+func (r *profileRepo) FollowUser(ctx context.Context, currentUserID uint, followingID uint) (err error) {
+	po := FollowUser{
+		UserID:      currentUserID,
+		FollowingID: followingID,
+	}
+	return r.data.db.Clauses(clause.OnConflict{DoNothing: true}).Create(&po).Error
+}
+
+func (r *profileRepo) UnfollowUser(ctx context.Context, currentUserID uint, followingID uint) (err error) {
+	po := FollowUser{
+		UserID:      currentUserID,
+		FollowingID: followingID,
+	}
+	return r.data.db.Delete(&po).Error
+}
+
+func (r *profileRepo) GetUserFollowingStatus(ctx context.Context, currentUserID uint, userIDs []uint) (following []bool, err error) {
+	var po FollowUser
+	if result := r.data.db.First(&po); result.Error != nil {
+		return nil, nil
+	}
+	return nil, nil
 }
