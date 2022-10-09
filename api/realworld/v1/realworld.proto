@@ -5,7 +5,7 @@ package realworld.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "tkratos-realworld/api/conduit/v1;v1";
+option go_package = "tkratos-realworld/api/realworld/v1;v1";
 
 service Realworld {
   rpc Login(LoginRequest) returns (UserReply) {
